@@ -1,3 +1,17 @@
+# JerryMod
+
+JerryMod is a personal Minecraft 1.20.1 Forge mod.
+
+### Open source
+
+With great help from the following projects, I was able to develop JerryMod.
+- @misode's loot table [generator](https://misode.github.io/loot-table/)
+- TurtyWurty's [playlist](https://youtube.com/playlist?list=PLaevjqy3XufYpmF5kvwy2Z1v-dsSUjhlx)
+- mapmaking.fr seconds to Minecraft tick [converter](https://mapmaking.fr/tick/)
+- [Furfsky Reborn](https://furfsky.net/credits)
+- I added some fun items highly inspired from [Hypixel](https://hypixel.net/) Skyblock.
+
+### Forge
 
 Source installation information for modders
 -------------------------------------------

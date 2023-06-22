@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/handheld",
+    "textures": {
+        "layer0": "jerrymod:item/sb_aspect_of_the_end"
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "parent": "minecraft:item/handheld",
+    "textures": {
+        "layer0": "jerrymod:item/sb_dark_claymore"
+    },
+    "display": {
+        "scale": [ 2, 2, 2 ]
+    }
+}

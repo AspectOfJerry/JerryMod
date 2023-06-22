@@ -1,0 +1,21 @@
+{
+    "block.jerrymod.sapphire_block": "Sapphire Block",
+    "item.jerrymod.sapphire": "Sapphire Gem",
+    "item.jerrymod.sapphire_pickaxe": "Sapphire Pickaxe",
+    "item.jerrymod.sapphire_helmet": "Sapphire Helmet",
+    "item.jerrymod.sapphire_chestplate": "Sapphire Chestplate",
+    "item.jerrymod.sapphire_leggings": "Sapphire Leggings",
+    "item.jerrymod.sapphire_boots": "Sapphire Boots",
+    "item.jerrymod.etheratomic_pearl": "EtherAtomic Pearl",
+    "item.jerrymod.cloud_candy": "Cloud Candy",
+    "item.jerrymod.tidal_candy": "Tidal Candy",
+    "item.jerrymod.sb_astraea": "Astraea",
+    "item.jerrymod.sb_hyperion": "Hyperion",
+    "item.jerrymod.sb_scylla": "Scylla",
+    "item.jerrymod.sb_valkyrie": "Valkyrie",
+    "item.jerrymod.sb_dark_claymore": "Dark Claymore",
+    "item.jerrymod.sb_aspect_of_the_end": "Aspect of the End",
+    "item.jerrymod.sb_juju_shortbow": "Juju Shortbow",
+    "item.jerrymod.sb_terminator": "Terminator",
+    "itemGroup.main_tab": "JerryMod"
+}
