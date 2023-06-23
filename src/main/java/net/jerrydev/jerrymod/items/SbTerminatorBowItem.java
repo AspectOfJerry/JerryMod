@@ -56,47 +56,48 @@ public class SbTerminatorBowItem extends BowItem {
             if (projectileStack.isEmpty()) {
                 projectileStack = new ItemStack(Items.ARROW);
             }
+            for (int i = 0; i < 2; i++) {
+                if (!worldIn.isClientSide) {
+                    ArrowItem arrowItem = (ArrowItem) (projectileStack.getItem() instanceof ArrowItem
+                            ? projectileStack.getItem()
+                            : Items.ARROW);
 
-            if (!worldIn.isClientSide) {
-                ArrowItem arrowItem = (ArrowItem) (projectileStack.getItem() instanceof ArrowItem
-                        ? projectileStack.getItem()
-                        : Items.ARROW);
+                    // Shoot the first arrow in the middle
+                    AbstractArrow abstractArrowCenter = arrowItem.createArrow(worldIn, projectileStack, player);
+                    abstractArrowCenter.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3.0F, 1.0F);
+                    worldIn.addFreshEntity(abstractArrowCenter);
 
-                // Shoot the first arrow in the middle
-                AbstractArrow abstractArrowCenter = arrowItem.createArrow(worldIn, projectileStack, player);
-                abstractArrowCenter.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3.0F, 1.0F);
-                worldIn.addFreshEntity(abstractArrowCenter);
+                    // Calculate the angle for the side arrows (10 degrees in radians)
+                    float sideAngle = (float) Math.toRadians(10.0);
 
-                // Calculate the angle for the side arrows (5 degrees in radians)
-                float sideAngle = (float) Math.toRadians(10.0);
+                    // Shoot the second arrow at a 10-degree angle to the left
+                    AbstractArrow abstractArrowLeft = arrowItem.createArrow(worldIn, projectileStack, player);
+                    abstractArrowLeft.shootFromRotation(player, player.getXRot(), player.getYRot() - sideAngle, 0.0F,
+                            3.0F, 1.0F); // Adjust Yaw rotation angle to -sideAngle
+                    worldIn.addFreshEntity(abstractArrowLeft);
 
-                // Shoot the second arrow at a 5-degree angle to the left
-                AbstractArrow abstractArrowLeft = arrowItem.createArrow(worldIn, projectileStack, player);
-                abstractArrowLeft.shootFromRotation(player, player.getXRot(), player.getYRot() - sideAngle, 0.0F, 3.0F,
-                        1.0F);
-                worldIn.addFreshEntity(abstractArrowLeft);
-
-                // Shoot the third arrow at a 5-degree angle to the right
-                AbstractArrow abstractArrowRight = arrowItem.createArrow(worldIn, projectileStack, player);
-                abstractArrowRight.shootFromRotation(player, player.getXRot(), player.getYRot() + sideAngle, 0.0F, 3.0F,
-                        1.0F);
-                worldIn.addFreshEntity(abstractArrowRight);
-            }
-
-            // Play sound effect
-            worldIn.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT,
-                    SoundSource.PLAYERS, 1.0F, 1.0F / (worldIn.random.nextFloat() * 0.4F + 1.2F) + 0.5F);
-
-            // Decrease arrow count and remove if empty
-            if (!hasInfinityEnchantment && !isInstaBuild) {
-                projectileStack.shrink(1);
-                if (projectileStack.isEmpty()) {
-                    player.getInventory().removeItem(projectileStack);
+                    // Shoot the third arrow at a 10-degree angle to the right
+                    AbstractArrow abstractArrowRight = arrowItem.createArrow(worldIn, projectileStack, player);
+                    abstractArrowRight.shootFromRotation(player, player.getXRot(), player.getYRot() + sideAngle, 0.0F,
+                            3.0F, 1.0F); // Adjust Yaw rotation angle to +sideAngle
+                    worldIn.addFreshEntity(abstractArrowRight);
                 }
-            }
 
-            // Increment item used statistic
-            player.awardStat(Stats.ITEM_USED.get(this));
+                // Play sound effect
+                worldIn.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT,
+                        SoundSource.PLAYERS, 1.0F, 1.0F / (worldIn.random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+
+                // Decrease arrow count and remove if empty
+                if (!hasInfinityEnchantment && !isInstaBuild) {
+                    projectileStack.shrink(1);
+                    if (projectileStack.isEmpty()) {
+                        player.getInventory().removeItem(projectileStack);
+                    }
+                }
+
+                // Increment item used statistic
+                player.awardStat(Stats.ITEM_USED.get(this));
+            }
         }
     }
 }
