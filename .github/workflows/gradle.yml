@@ -22,7 +22,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'oracle'
-          architecture: x64
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Run build with Gradle Wrapper
