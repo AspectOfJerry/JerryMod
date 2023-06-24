@@ -7,10 +7,10 @@ import net.minecraftforge.common.Tags;
 
 public class TierInit {
     public static final ForgeTier SAPPHIRE_TIER = new ForgeTier(
-            4,
+            5,
             1800,
             1f,
-            5,
+            3,
             15,
             TagInit.NEEDS_SAPPHIRE_TOOL,
             () -> Ingredient.of(ItemRegistry.SAPPHIRE::get));

@@ -56,7 +56,7 @@ public class SbTerminatorBowItem extends BowItem {
             if (projectileStack.isEmpty()) {
                 projectileStack = new ItemStack(Items.ARROW);
             }
-            for (int i = 0; i < 2; i++) {
+
                 if (!worldIn.isClientSide) {
                     ArrowItem arrowItem = (ArrowItem) (projectileStack.getItem() instanceof ArrowItem
                             ? projectileStack.getItem()
@@ -67,25 +67,36 @@ public class SbTerminatorBowItem extends BowItem {
                     abstractArrowCenter.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3.0F, 1.0F);
                     worldIn.addFreshEntity(abstractArrowCenter);
 
-                    // Calculate the angle for the side arrows (10 degrees in radians)
-                    float sideAngle = (float) Math.toRadians(10.0);
+
+                    // Side arrow angle
+                    float sideAngle = 5f;
 
                     // Shoot the second arrow at a 10-degree angle to the left
                     AbstractArrow abstractArrowLeft = arrowItem.createArrow(worldIn, projectileStack, player);
-                    abstractArrowLeft.shootFromRotation(player, player.getXRot(), player.getYRot() - sideAngle, 0.0F,
+                    abstractArrowLeft.shootFromRotation(player, player.getXRot(), (player.getYRot() - sideAngle), 0.0F,
                             3.0F, 1.0F); // Adjust Yaw rotation angle to -sideAngle
                     worldIn.addFreshEntity(abstractArrowLeft);
 
+
                     // Shoot the third arrow at a 10-degree angle to the right
                     AbstractArrow abstractArrowRight = arrowItem.createArrow(worldIn, projectileStack, player);
-                    abstractArrowRight.shootFromRotation(player, player.getXRot(), player.getYRot() + sideAngle, 0.0F,
+                    abstractArrowRight.shootFromRotation(player, player.getXRot(), (player.getYRot() + sideAngle), 0.0F,
                             3.0F, 1.0F); // Adjust Yaw rotation angle to +sideAngle
                     worldIn.addFreshEntity(abstractArrowRight);
+
+
+                    // Shoot the fourth arrow in the middle (ultimate Duplex)
+                    AbstractArrow abstractArrowDuplexCenter = arrowItem.createArrow(worldIn, projectileStack, player);
+                    abstractArrowDuplexCenter.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3.0F, 1.0F);
+                    worldIn.addFreshEntity(abstractArrowDuplexCenter);
                 }
 
                 // Play sound effect
                 worldIn.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT,
                         SoundSource.PLAYERS, 1.0F, 1.0F / (worldIn.random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+                worldIn.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.GUARDIAN_DEATH,
+                        SoundSource.PLAYERS, 0.6F, 1.0F);
+
 
                 // Decrease arrow count and remove if empty
                 if (!hasInfinityEnchantment && !isInstaBuild) {
@@ -97,7 +108,6 @@ public class SbTerminatorBowItem extends BowItem {
 
                 // Increment item used statistic
                 player.awardStat(Stats.ITEM_USED.get(this));
-            }
         }
     }
 }
