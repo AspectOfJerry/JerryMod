@@ -93,9 +93,9 @@ public class SbTerminatorBowItem extends BowItem {
 
                 // Play sound effect
                 worldIn.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT,
-                        SoundSource.PLAYERS, 1.0F, 1.0F / (worldIn.random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+                        SoundSource.PLAYERS, 0.95F, 1.0F / (worldIn.random.nextFloat() * 0.4F + 1.2F) + 0.5F);
                 worldIn.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.GUARDIAN_DEATH,
-                        SoundSource.PLAYERS, 0.6F, 1.0F);
+                        SoundSource.PLAYERS, 0.85F, 1.0F);
 
 
                 // Decrease arrow count and remove if empty
