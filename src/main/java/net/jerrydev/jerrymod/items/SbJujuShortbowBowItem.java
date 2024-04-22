@@ -17,33 +17,35 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.ForgeEventFactory;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
 public class SbJujuShortbowBowItem extends BowItem {
+    public static final double BASE_DAMAGE = 5;
+
     public SbJujuShortbowBowItem(Properties p_40660_) {
         super(p_40660_);
     }
 
     @Override
     public int getDefaultProjectileRange() {
-        return 15;
+        return 10;
     }
 
     @Override
-    public Predicate<ItemStack> getAllSupportedProjectiles() {
+    public @NotNull Predicate<ItemStack> getAllSupportedProjectiles() {
         return ARROW_ONLY;
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
-        if (!(entityLiving instanceof Player)) {
+    public void releaseUsing(@NotNull ItemStack stack, @NotNull Level worldIn, @NotNull LivingEntity entityLiving, int timeLeft) {
+        if (!(entityLiving instanceof Player player)) {
             return;
         }
 
-        Player player = (Player) entityLiving;
         boolean isInstaBuild = player.getAbilities().instabuild;
-        boolean hasInfinityEnchantment = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS,
+        boolean hasInfinityEnchantment = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.INFINITY_ARROWS,
                 stack) > 0;
         ItemStack projectileStack = player.getProjectile(stack);
 
@@ -63,9 +65,15 @@ public class SbJujuShortbowBowItem extends BowItem {
                 ArrowItem arrowItem = (ArrowItem) (projectileStack.getItem() instanceof ArrowItem
                         ? projectileStack.getItem()
                         : Items.ARROW);
-                AbstractArrow abstractArrow = arrowItem.createArrow(worldIn, projectileStack, player);
-                abstractArrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3.0F, 1.0F);
-                worldIn.addFreshEntity(abstractArrow);
+
+                for (int i = 0; i < 9; i++) {
+                    AbstractArrow abstractArrow = arrowItem.createArrow(worldIn, projectileStack, player);
+                    abstractArrow.setPierceLevel((byte) 3);
+                    abstractArrow.setBaseDamage(this.BASE_DAMAGE);
+                    abstractArrow.setSecondsOnFire(2);
+                    abstractArrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3.0F, 1.0F);
+                    worldIn.addFreshEntity(abstractArrow);
+                }
             }
 
             // Play sound effect

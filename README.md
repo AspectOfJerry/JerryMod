@@ -2,6 +2,8 @@
 
 JerryMod is a personal Minecraft 1.20.1 Forge mod.
 
+- Java 17
+
 ### GitHub Actions Gradle fix
 
 https://github.com/actions/starter-workflows/issues/171

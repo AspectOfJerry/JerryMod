@@ -15,9 +15,9 @@ public class EntityRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES,
             JerryMod.MODID);
 
-    // public static final RegistryObject<EntityType<CustomAbstractArrow>>
-    // CUSTOM_ABSTRACT_ARROW = ENTITIES.register("custom_abstract_arrow",
-    // ()->EntityType.Builder.of(CustomAbstractArrow::new , MobCategory.MISC)
-    // .build(JerryMod.MODID +":custom_abstract_arrow")
-    // );
+    public static final RegistryObject<EntityType<CustomAbstractArrow>>
+            CUSTOM_ABSTRACT_ARROW = ENTITIES.register("custom_abstract_arrow",
+            () -> EntityType.Builder.of(CustomAbstractArrow::new, MobCategory.MISC)
+                    .build(JerryMod.MODID + ":custom_abstract_arrow")
+    );
 }
